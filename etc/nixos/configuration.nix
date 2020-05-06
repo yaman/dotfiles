@@ -156,6 +156,11 @@ users.users.canavar.packages = with pkgs; [
 	fzf
 	fzf-zsh
 	zsh-powerlevel10k
+	tmuxPlugins.yank
+	tmuxPlugins.sensible
+	tmuxPlugins.battery
+	nmap
+	ncat
 ];
 
 
