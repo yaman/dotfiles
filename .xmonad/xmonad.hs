@@ -17,7 +17,6 @@ import XMonad.Actions.CycleWS
 main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
 
 -- -- Command to launch the bar.
--- myBar = "exec ~/polybar-scripts/launch.sh &"
 myBar = "echo x"
 
 --
@@ -60,12 +59,12 @@ myConfig = ewmh defaultConfig
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawnOn "" "feh --randomize --bg-fill ~/Pictures/walpapers/*"
+--  spawnOn "" "feh --randomize --bg-fill ~/Pictures/walpapers/*"
 --  spawnOn "" "xautolock -time 5 -locker xscreensaver-command -lock"
   spawnOn "" "xbindkeys -p"
   spawnOn "" "mate-screensaver"
   spawnOn "" "xmodmap ~/.Xmodmap"
-  spawnOn "" "exec ~/polybar-scripts/launch.sh"
+  spawnOn "" "exec ~/.config/polybar/launch.sh"
 
 myTerminal = "termite"
 
