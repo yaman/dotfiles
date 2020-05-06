@@ -10,11 +10,20 @@ import XMonad.Layout.NoBorders (smartBorders)
 import XMonad.Layout.Spacing (smartSpacing)
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Actions.CycleWS
+import Data.List (sortBy)
+import Data.Function (on)
+import Control.Monad (forM_, join)
+import XMonad.Util.Run (safeSpawn)
+import XMonad.Util.NamedWindows (getName)
+import qualified XMonad.StackSet as W
 
 
 -- The main function.
 -- main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
-main = xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
+main = do 
+	xmonad =<< statusBar myBar myPP toggleStrutsKey myConfig
+	forM_ [".xmonad-workspace-log", ".xmonad-title-log"] $ \file -> do
+    		safeSpawn "mkfifo" ["/tmp/" ++ file]
 
 -- -- Command to launch the bar.
 myBar = "echo x"
@@ -44,6 +53,7 @@ myConfig = ewmh defaultConfig
     , normalBorderColor = myNormalBorderColor
     , workspaces = myWorkspaces
     , layoutHook = smartSpacing 2 $ smartBorders $ layoutHook defaultConfig
+    , logHook         = eventLogHook
     , manageHook =
         manageHook defaultConfig <+> manageDocks
     , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
@@ -80,3 +90,18 @@ myFocusedBorderColor = "#ffffff"
 myNormalBorderColor = "#cccccc"
 
 myWorkspaces = ["emacs", "www", "comms", "musix", "media", "extra1", "extra2"]
+
+eventLogHook = do
+  winset <- gets windowset
+  title <- maybe (return "") (fmap show . getName) . W.peek $ winset
+  let currWs = W.currentTag winset
+  let wss = map W.tag $ W.workspaces winset
+  let wsStr = join $ map (fmt currWs) $ sort' wss
+
+  io $ appendFile "/tmp/.xmonad-title-log" (title ++ "\n")
+  io $ appendFile "/tmp/.xmonad-workspace-log" (wsStr ++ "\n")
+
+  where fmt currWs ws
+          | currWs == ws = "[" ++ ws ++ "]"
+          | otherwise    = " " ++ ws ++ " "
+        sort' = sortBy (compare `on` (!! 0))
