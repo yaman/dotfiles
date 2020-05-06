@@ -136,6 +136,17 @@ users.users.canavar.packages = with pkgs; [
 	roboto
 	roboto-mono
 	taskwarrior
+	siji
+	unifont
+	noto-fonts
+	noto-fonts-emoji
+	noto-fonts-extra
+	tamsyn
+	font-awesome
+	material-icons
+	nerdfonts
+	fira-code-symbols
+	gucharmap
 ];
 
 
