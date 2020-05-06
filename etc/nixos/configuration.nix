@@ -148,6 +148,7 @@ users.users.canavar.packages = with pkgs; [
 	fira-code-symbols
 	gucharmap
 	gnome3.gnome-characters
+	ripgrep
 ];
 
 
