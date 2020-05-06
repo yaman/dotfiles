@@ -147,6 +147,7 @@ users.users.canavar.packages = with pkgs; [
 	nerdfonts
 	fira-code-symbols
 	gucharmap
+	gnome3.gnome-characters
 ];
 
 
