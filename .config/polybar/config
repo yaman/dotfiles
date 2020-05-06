@@ -67,7 +67,7 @@ cursor-scroll = ns-resize
 
 modules-left= alsa 
 modules-center = date
-modules-right = workspaces-xmonad wlan filesystem xkeyboard memory cpu battery system-cpu-temppercore powermenu
+modules-right = taskwarrior wlan filesystem xkeyboard memory cpu battery system-cpu-temppercore powermenu
 ; modules-right = wlan filesystem xbacklight alsa xkeyboard memory cpu battery system-cpu-temppercore powermenu
 
 [module/workspaces-xmonad]
@@ -320,6 +320,14 @@ ramp-0 = >
 ramp-1 = >
 ramp-2 = >
 ramp-foreground = ${colors.foreground-alt}
+
+[module/taskwarrior]
+interval = 30
+type = custom/script
+exec = ~/.config/polybar/task_polybar.sh
+format = [ <label>]
+format-foreground = #FFF
+click-left = task "$((`cat /tmp/tw_polybar_id`))" done
 
 [module/powermenu]
 type = custom/menu
