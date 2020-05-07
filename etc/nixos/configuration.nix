@@ -56,6 +56,7 @@ environment.systemPackages = with pkgs; [
 	dmenu
 	pciutils
 	cachix
+	gcc
 	rofi
 	rofi-calc
 	rofi-pass
@@ -100,7 +101,11 @@ users.users.canavar = {
   extraGroups = [ "wheel" "networkmanager" ];
 };
 
+environment.variables = { EDITOR = "vim"; };
+
 users.users.canavar.packages = with pkgs; [
+	neovim
+	python38Packages.pynvim
 	brave
 	discord
 	axel
@@ -120,7 +125,6 @@ users.users.canavar.packages = with pkgs; [
 	bitwarden
 	bitwarden-cli
 	python38
-	neovim
 	oh-my-zsh
 	tree
 	file
@@ -135,16 +139,9 @@ users.users.canavar.packages = with pkgs; [
 	xbindkeys
 	xorg.xmodmap
 	killall
-	roboto
-	roboto-mono
 	taskwarrior
 	siji
-	unifont
-	noto-fonts
-	noto-fonts-emoji
-	noto-fonts-extra
 	tamsyn
-	font-awesome
 	material-icons
 	nerdfonts
 	fira-code-symbols
@@ -155,6 +152,7 @@ users.users.canavar.packages = with pkgs; [
 	starship
 	kubectl
 	exa
+	autojump
 	fzf
 	fzf-zsh
 	zsh-powerlevel10k
@@ -166,6 +164,7 @@ users.users.canavar.packages = with pkgs; [
 	vimPlugins.spacevim
 	rustup
 	cargo
+	rustracer
 	go-langserver
 	(import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {}).ghcide-ghc865
 ];
@@ -180,6 +179,12 @@ fonts.fonts = with pkgs; [
   terminus_font
   ubuntu_font_family
   unifont
+  noto-fonts
+  noto-fonts-emoji
+  noto-fonts-extra
+  font-awesome
+  roboto
+  roboto-mono
 ];
 
 programs.zsh.ohMyZsh = {

@@ -9,3 +9,9 @@ rustup toolchain install nightly
 
 echo "adding rustfmt..."
 rustup component add rustfmt
+rustup component add rust-src
+rustup component add rust-docs
+rustup component add clippy-preview
+rustup update
+
+cargo +nightly install racer
