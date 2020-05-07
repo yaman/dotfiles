@@ -4,6 +4,7 @@
 imports =
   [ # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./cachix.nix
   ];
 
 # Use the systemd-boot EFI boot loader.
@@ -54,6 +55,7 @@ environment.systemPackages = with pkgs; [
 	taffybar
 	dmenu
 	pciutils
+	cachix
 	rofi
 	rofi-calc
 	rofi-pass
@@ -161,6 +163,11 @@ users.users.canavar.packages = with pkgs; [
 	tmuxPlugins.battery
 	nmap
 	ncat
+	vimPlugins.spacevim
+	rustup
+	cargo
+	go-langserver
+	(import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {}).ghcide-ghc865
 ];
 
 
