@@ -48,6 +48,7 @@ environment.systemPackages = with pkgs; [
 	vim
 	wget
 	curl
+	dpkg
 	git
 	zsh
 	tmux
@@ -167,6 +168,7 @@ users.users.canavar.packages = with pkgs; [
 	rustracer
 	go-langserver
 	(import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {}).ghcide-ghc865
+	unzip
 ];
 
 
