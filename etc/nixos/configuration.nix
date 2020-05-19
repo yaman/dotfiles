@@ -33,6 +33,8 @@ networking.wireless.enable = true;  # Enables wireless support via wpa_supplican
 system.autoUpgrade.enable = true;
 system.autoUpgrade.allowReboot = true;
 
+virtualisation.docker.enable = true;
+
 networking.useDHCP = false;
 networking.interfaces.wlp3s0.useDHCP = true;
 
@@ -46,6 +48,8 @@ nix.binaryCaches = [
   # $ nix search wget
 environment.systemPackages = with pkgs; [
 	vim
+	traceroute
+	htop
 	wget
 	curl
 	dpkg
@@ -61,6 +65,9 @@ environment.systemPackages = with pkgs; [
 	rofi
 	rofi-calc
 	rofi-pass
+	docker
+	docker-compose
+	xorg.xbacklight
 ];
 
 sound.enable = true;
@@ -99,7 +106,7 @@ users.users.canavar = {
   isNormalUser = true;
   shell = pkgs.zsh;
   home = "/home/canavar";
-  extraGroups = [ "wheel" "networkmanager" ];
+  extraGroups = [ "wheel" "networkmanager" "docker" ];
 };
 
 environment.variables = { EDITOR = "vim"; };
@@ -121,6 +128,7 @@ users.users.canavar.packages = with pkgs; [
 	flutter
 	subdl
 	python38Packages.subliminal
+	subberthehut
 	mpv
 	vlc
 	bitwarden
@@ -133,6 +141,7 @@ users.users.canavar.packages = with pkgs; [
 	wpsoffice
 	evince
 	firefox
+	opera
 	inkscape
 	xclip
 	polybar
@@ -169,6 +178,8 @@ users.users.canavar.packages = with pkgs; [
 	go-langserver
 	(import (builtins.fetchTarball "https://github.com/cachix/ghcide-nix/tarball/master") {}).ghcide-ghc865
 	unzip
+	simplescreenrecorder
+	flameshot
 ];
 
 
@@ -211,15 +222,6 @@ programs.zsh = {
     source $ZSH/oh-my-zsh.sh
   '';
   promptInit = "";
-};
-
-programs.light.enable = true;
-services.actkbd = {
-  enable = true;
-  bindings = [
-    { keys = [ 225 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -A 10"; }
-    { keys = [ 224 ]; events = [ "key" ]; command = "/run/current-system/sw/bin/light -U 10"; }
-  ];
 };
 
 system.stateVersion = "20.09"; # Did you read the comment?
