@@ -27,11 +27,12 @@ boot.extraModprobeConfig = ''
   options hid_apple fnmode=2
 '';
 
-networking.hostName = "guardian"; #
-networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+networking.hostName = "guardian"; 
+# networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+networking.networkmanager.enable = true;
       
 system.autoUpgrade.enable = true;
-system.autoUpgrade.allowReboot = true;
+system.autoUpgrade.allowReboot = false;
 
 virtualisation.docker.enable = true;
 
@@ -49,6 +50,7 @@ nix.binaryCaches = [
 environment.systemPackages = with pkgs; [
 	vim
 	traceroute
+	go-mtpfs
 	htop
 	wget
 	curl
@@ -180,6 +182,7 @@ users.users.canavar.packages = with pkgs; [
 	unzip
 	simplescreenrecorder
 	flameshot
+	networkmanager_dmenu
 ];
 
 
