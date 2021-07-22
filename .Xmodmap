@@ -1,3 +1,8 @@
+clear lock
+clear control
+keycode 66 = Control_L
+add control = Control_L Control_R
+
 keycode   8 =
 keycode  10 = 1 exclam 1 exclam exclamdown onesuperior greater exclamdown
 keycode  11 = 2 at 2 apostrophe masculine twosuperior sterling twosuperior

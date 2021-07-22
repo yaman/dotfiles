@@ -12,7 +12,7 @@ import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Actions.CycleWS
 import Data.List (sortBy)
 import Data.Function (on)
-import Control.Monad (forM_, join)
+import Control.Monad (forM_, join, liftM2)
 import XMonad.Util.Run (safeSpawn)
 import XMonad.Util.NamedWindows (getName)
 import qualified XMonad.StackSet as W
@@ -43,6 +43,15 @@ shortcuts =
   , ("<F11>", spawn "mate-screensaver-command -l")
   ]
 
+myManageHook = composeAll
+   [ className =? "termite" --> viewShift "terminal"
+   , className =? "firefox" --> viewShift "www"
+   , className =? "discord"  --> viewShift "dc"
+   , className =? "telegram-desktop"  --> viewShift "comms"
+   , manageDocks
+   ]
+   where viewShift = doF . liftM2 (.) W.greedyView W.shift
+
 --
 -- -- Main configuration, override the defaults to your liking.
 myConfig = ewmh defaultConfig
@@ -55,7 +64,7 @@ myConfig = ewmh defaultConfig
     , layoutHook = smartSpacing 2 $ smartBorders $ layoutHook defaultConfig
     , logHook         = eventLogHook
     , manageHook =
-        manageHook defaultConfig <+> manageDocks
+        myManageHook <+> manageHook defaultConfig 
     , handleEventHook = handleEventHook defaultConfig <+> fullscreenEventHook
      -- , startupHook = setWMName "LG3D"
     , startupHook = myStartupHook <+> ewmhDesktopsStartup >> setWMName "LG3D"
@@ -71,10 +80,13 @@ myStartupHook :: X ()
 myStartupHook = do
 --  spawnOn "" "feh --randomize --bg-fill ~/Pictures/walpapers/*"
 --  spawnOn "" "xautolock -time 5 -locker xscreensaver-command -lock"
+  spawnOn "" "feh --randomize --bg-fill ~/.config/variety/Downloaded/**/*"
+  spawnOn "" "variety --resume"
   spawnOn "" "xbindkeys -p"
+  spawnOn "" "fusuma"
   spawnOn "" "mate-screensaver"
   spawnOn "" "xmodmap ~/.Xmodmap"
-  spawnOn "" "exec ~/.config/polybar/launch.sh"
+  spawnOn "" "exec ~/.bin/launch_poly.sh"
 
 myTerminal = "termite"
 
@@ -87,9 +99,9 @@ myBorderWidth = 1
 myFocusedBorderColor = "#ffffff"
 
 -- color of inactive border
-myNormalBorderColor = "#cccccc"
+myNormalBorderColor = "#000000"
 
-myWorkspaces = ["emacs", "www", "comms", "musix", "media", "extra1", "extra2"]
+myWorkspaces = ["www", "dc", "terminal", "comms", "utilities"]
 
 eventLogHook = do
   winset <- gets windowset

@@ -76,28 +76,22 @@
 "pactl set-sink-mute 0 toggle"
    XF86AudioMute
 
-"xbacklight +5"
+"xbacklight +10"
    XF86MonBrightnessUp
 
-"xbacklight -5"
+"xbacklight -10"
    XF86MonBrightnessDown
-
-"xbacklight -ctrl  smc::kbd_backlight -inc 10"
-   XF86KbdBrightnessUp
-
-"xbacklight -ctrl  smc::kbd_backlight -dec 10"
-   XF86KbdBrightnessDown
 
 #open networkmanager_dmenu
 "networkmanager_dmenu"
    m:0x8 + c:96
    Alt + F12
 
-# "rofi -combi-modi window,drun,run,ssh -theme Adapta-Nokto -font 'hack 12' -show combi"
-   # Mod4 + x
+"rofi -combi-modi window,drun,run,ssh -theme Adapta-Nokto -font 'hack 12' -show combi"
+    Mod4 + x
 #
-"rofi --dmenu -show combi" 
-   Mod4 + x
+#"rofi --dmenu -show combi" 
+#   Mod4 + x
 
 "bwmenu -c 60"
    Mod4 + c
