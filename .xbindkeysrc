@@ -76,10 +76,10 @@
 "pactl set-sink-mute 0 toggle"
    XF86AudioMute
 
-"xbacklight +10"
+"blight set +10%"
    XF86MonBrightnessUp
 
-"xbacklight -10"
+"blight set -10%"
    XF86MonBrightnessDown
 
 #open networkmanager_dmenu
@@ -88,13 +88,11 @@
    Alt + F12
 
 "rofi -combi-modi window,drun,run,ssh -theme Adapta-Nokto -font 'hack 12' -show combi"
-    Mod4 + x
-#
-#"rofi --dmenu -show combi" 
-#   Mod4 + x
+   Mod4 + x 
 
-"bwmenu -c 60"
+"google-chrome-stable"
    Mod4 + c
+
 ##################################
 # End of xbindkeys configuration #
 ##################################
